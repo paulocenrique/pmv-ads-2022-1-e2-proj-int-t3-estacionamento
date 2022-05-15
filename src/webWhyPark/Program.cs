@@ -1,14 +1,11 @@
 using Microsoft.EntityFrameworkCore;
 using webWhyPark.Context;
-using DotNetEnv;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
-DotNetEnv.Env.Load();
-var sqlConnection = Environment.GetEnvironmentVariable("URL_DATABASE");
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(optios =>
-optios.UseSqlServer(connectionString: sqlConnection!));
+optios.UseSqlServer(@"Server=tcp:whypark.database.windows.net,1433;Initial Catalog=WhyPark;Persist Security Info=False;User ID=whypark;Password=@Pucminas;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=True;Connection Timeout=30;"));
 
 
 var app = builder.Build();
